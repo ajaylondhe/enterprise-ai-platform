@@ -1,0 +1,41 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: enterprise-ai-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: enterprise_ai
+      MYSQL_USER: enterprise
+      MYSQL_PASSWORD: enterprise
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  pgvector:
+    image: pgvector/pgvector:pg17
+    container_name: enterprise-ai-pgvector
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vector_db
+      POSTGRES_USER: vector_user
+      POSTGRES_PASSWORD: vector_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vector_user -d vector_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mysql_data:
+  pgvector_data:
