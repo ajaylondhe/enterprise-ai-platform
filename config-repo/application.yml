@@ -1,0 +1,20 @@
+spring:
+  jackson:
+    time-zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+
+  endpoint:
+    health:
+      show-details: when-authorized
+
+eems:
+  application:
+    name: Enterprise AI Platform
+    version: 1.0.0

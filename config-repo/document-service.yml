@@ -1,0 +1,18 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: document-service
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+eems:
+  document:
+    allowed-types:
+      - application/pdf
+      - text/plain
+      - text/markdown
