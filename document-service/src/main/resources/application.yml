@@ -40,3 +40,5 @@ management:
   endpoint:
     health:
       show-details: always
+jwt:
+  secret: enterprise-ai-platform-secret-key-change-this-in-production-2026

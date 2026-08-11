@@ -51,4 +51,4 @@ logging:
 
     org.hibernate.SQL: DEBUG
 jwt:
-  secret: "enterprise-ai-platform-secret-key-2026-secure-jwt-key"
+  secret: enterprise-ai-platform-secret-key-change-this-in-production-2026

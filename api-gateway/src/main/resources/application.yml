@@ -7,74 +7,50 @@ spring:
 
   cloud:
     gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: false
 
-      discovery:
-        locator:
-          enabled: false
+          routes:
 
-      routes:
+            - id: auth-service
+              uri: lb://AUTH-SERVICE
+              predicates:
+                - Path=/api/auth/**
 
-        # =========================
-        # AUTH SERVICE
-        # =========================
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/api/auth/**
+            - id: employee-service
+              uri: lb://EMPLOYEE-SERVICE
+              predicates:
+                - Path=/api/employees/**
 
-        # =========================
-        # EMPLOYEE SERVICE
-        # =========================
-        - id: employee-service
-          uri: lb://EMPLOYEE-SERVICE
-          predicates:
-            - Path=/api/employees/**
+            - id: leave-service
+              uri: lb://LEAVE-SERVICE
+              predicates:
+                - Path=/api/leaves/**
 
-        # =========================
-        # LEAVE SERVICE
-        # =========================
-        - id: leave-service
-          uri: lb://LEAVE-SERVICE
-          predicates:
-            - Path=/api/leaves/**
+            - id: document-service
+              uri: lb://DOCUMENT-SERVICE
+              predicates:
+                - Path=/api/documents/**
 
-        # =========================
-        # DOCUMENT SERVICE
-        # =========================
-        - id: document-service
-          uri: lb://DOCUMENT-SERVICE
-          predicates:
-            - Path=/api/documents/**
+            - id: ai-service
+              uri: lb://AI-SERVICE
+              predicates:
+                - Path=/api/ai/**
 
-        # =========================
-        # AI SERVICE
-        # =========================
-        - id: ai-service
-          uri: lb://AI-SERVICE
-          predicates:
-            - Path=/api/ai/**
-
-        # =========================
-        # NOTIFICATION SERVICE
-        # =========================
-        - id: notification-service
-          uri: lb://NOTIFICATION-SERVICE
-          predicates:
-            - Path=/api/notifications/**
-
-
-jwt:
-  secret: "enterprise-ai-platform-secret-key-2026-secure-jwt-key"
-
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/notifications/**
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
     register-with-eureka: true
     fetch-registry: true
-
 
 management:
   endpoints:
@@ -83,5 +59,12 @@ management:
         include: health,info,gateway
 
   endpoint:
+    gateway:
+      access: unrestricted
     health:
       show-details: always
+
+
+
+jwt:
+  secret: enterprise-ai-platform-secret-key-change-this-in-production-2026

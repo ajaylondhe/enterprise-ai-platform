@@ -1,4 +1,4 @@
-package com.enterpriseai.employee.security;
+package com.enterpriseai.notification.security;
 
 import com.enterpriseai.common.security.JwtAuthenticationFilter;
 import com.enterpriseai.common.security.JwtService;
@@ -16,7 +16,6 @@ public class JwtConfig {
 
         return new JwtService(secret);
     }
-
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(
             JwtService jwtService) {
