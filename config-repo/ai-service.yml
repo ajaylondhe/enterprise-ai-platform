@@ -5,21 +5,27 @@ spring:
   application:
     name: ai-service
 
-  datasource:
-    url: jdbc:mysql://localhost:3307/enterprise_ai
-    username: enterprise
-    password: enterprise
-
   ai:
-    chat:
-      options:
-        temperature: 0.2
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        model: llama3.2
+        options:
+          temperature: 0.3
 
-eems:
-  ai:
-    rag:
-      top-k: 5
-      similarity-threshold: 0.75
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
 
-    assistant:
-      max-conversation-messages: 20
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+  endpoint:
+    health:
+      show-details: always
