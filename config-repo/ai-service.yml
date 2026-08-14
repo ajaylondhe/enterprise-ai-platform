@@ -8,13 +8,22 @@ spring:
   ai:
     ollama:
       base-url: http://localhost:11434
+
       chat:
         model: llama3.2
-        options:
-          temperature: 0.3
+        temperature: 0.3
+        num-predict: 120
+        num-ctx: 4096
 
-jwt:
-  secret: enterprise-ai-platform-secret-key-change-this-in-production-2026
+      embedding:
+        model: nomic-embed-text
+
+    vectorstore:
+      chroma:
+        client:
+          base-url: http://localhost:8000
+        collection-name: enterprise-knowledge
+        initialize-schema: true
 
 eureka:
   client:
@@ -27,8 +36,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include:
+          - health
+          - info
 
   endpoint:
     health:
       show-details: always
+
+jwt:
+  secret: enterprise-ai-platform-secret-key-change-this-in-production-2026

@@ -15,7 +15,6 @@ spring:
       ddl-auto: update
     show-sql: false
 
-eems:
-  security:
-    jwt:
-      expiration-minutes: 30
+jwt:
+  secret: enterprise-ai-platform-secret-key-2026-secure-jwt-key
+  expiration: 1800000
