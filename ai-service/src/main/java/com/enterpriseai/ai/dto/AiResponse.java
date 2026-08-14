@@ -1,0 +1,4 @@
+package com.enterpriseai.ai.dto;
+
+public class AiResponse {
+}
